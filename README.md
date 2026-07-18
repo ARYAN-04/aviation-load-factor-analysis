@@ -32,6 +32,7 @@ The analysis is broken down into three main data stories:
 - **Environment & Dependency Management**: uv
 - **Data Processing**: pandas, numpy, openpyxl
 - **Visualizations**: plotly (interactive), seaborn, matplotlib
+- **Dashboard**: Streamlit
 - **Environment**: Jupyter Notebook
 
 ## Data Architecture
@@ -41,6 +42,20 @@ The data pipeline handles messy DGCA Excel templates, mapping inconsistent colum
 - `data/raw/`: Original Excel files directly from DGCA.
 - `data/processed/`: Standardized CSVs containing 12 months of clean data per session.
 - `data/filtered/`: Master datasets explicitly sliced for the 3-Year Market View, 7-Year Recovery Trend, and the Mid-COVID Cargo Transition.
+
+## Project Structure
+
+```
+src/
+├── config.py        # Shared constants (column mappings, directories)
+├── etl.py           # ETL pipeline for processing raw DGCA Excel files
+├── data_loader.py   # Loads processed CSVs, casts types
+├── datasets.py      # Creates filtered datasets A, B, C
+├── analysis.py      # Pivot tables and aggregations
+└── plots.py         # Plotly chart builders
+app.py               # Streamlit dashboard
+Main.ipynb           # Original Jupyter notebook (reference)
+```
 
 ## Getting Started (Local Setup)
 
@@ -66,7 +81,11 @@ This project uses the uv package manager to guarantee 100% environment reproduci
 
 4. **Launch the analysis**
    ```bash
+   # Jupyter Notebook
    uv run jupyter lab
+
+   # Streamlit Dashboard
+   uv run streamlit run app.py
    ```
 
 ## License
